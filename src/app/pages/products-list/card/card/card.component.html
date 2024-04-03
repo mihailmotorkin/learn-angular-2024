@@ -1,14 +1,21 @@
 <mat-card class="example-card">
-    <mat-card-header>
-        <!-- <div mat-card-avatar class="example-header-image"></div> -->
-        <mat-card-title>{{ products.name }}</mat-card-title>
-        <mat-card-subtitle>rating: {{ products.rating }}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image alt="Photo of a Shiba Inu" [src]="products.images[0].url" />
-    <mat-card-content>
-        <p>price: {{ products.price }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button (click)="onBuyClick($event)">BUY</button>
-    </mat-card-actions>
+  <mat-card-header>
+    <mat-card-title class="title">{{ products.name }}</mat-card-title>
+    <mat-card-subtitle class="subtitle">price: {{ products.rating }} $</mat-card-subtitle>
+  </mat-card-header>
+  <div class="carousel">
+    <button mat-button disabled>
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <img class="tablet-photo" mat-card-image alt="Photo of a Tablet" [src]="products.images[0].url" />
+    <button mat-button disabled>
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+  <mat-card-content>
+    <p>rating: {{ products.rating }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="onBuyClick($event)">BUY</button>
+  </mat-card-actions>
 </mat-card>
