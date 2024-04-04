@@ -1,2 +1,9 @@
-<app-header></app-header>
+<app-header [applicationConfig]="applicationConfig" (menuClick)="onMenuClick($event)"></app-header>
+<!-- <app-sidenav [isSidenavOpened]="isSidenavOpenedFromApp"
+  (isSidenavOpenedChange)="isSidenavOpenedFromApp = $event"></app-sidenav> 
+          под капотом так, а можно two-way
+            |
+            v
+-->
+<app-sidenav [(isSidenavOpened)]="isSidenavOpenedFromApp"></app-sidenav>
 <app-products-list></app-products-list>

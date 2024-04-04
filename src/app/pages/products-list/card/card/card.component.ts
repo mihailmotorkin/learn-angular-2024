@@ -14,4 +14,8 @@ export class CardComponent {
         event.stopPropagation();
         console.log('Buy click!');
     }
+
+    isStarActive(starIndex: number): boolean {
+        return this.products.rating >= starIndex;
+    }
 }
