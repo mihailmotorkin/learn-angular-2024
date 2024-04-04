@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 import {Component} from '@angular/core';
+import {IProduct} from 'src/app/shared/products/product.interface';
+import {productsMock} from 'src/app/shared/products/product.mock';
 
 @Component({
     selector: 'app-products-list',
@@ -7,7 +9,9 @@ import {Component} from '@angular/core';
     styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent {
-    onCardClick() {
-        console.log('Card click! from product-list');
+    readonly products = productsMock;
+
+    onBuyProduct(id: IProduct['_id']) {
+        console.log(id, 'from ProductListComponent');
     }
 }

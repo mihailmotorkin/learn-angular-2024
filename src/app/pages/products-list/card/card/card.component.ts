@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import {Component} from '@angular/core';
-import {productMock} from 'src/app/shared/products/product.mock';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {IProduct} from 'src/app/shared/products/product.interface';
 
 @Component({
     selector: 'app-card',
@@ -8,14 +8,17 @@ import {productMock} from 'src/app/shared/products/product.mock';
     styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-    products = productMock;
+    @Input() product: IProduct | undefined;
+    @Output() readonly buyProduck = new EventEmitter<IProduct['_id']>();
 
-    onBuyClick(event: Event) {
+    onBuyProduct(event: Event) {
         event.stopPropagation();
-        console.log('Buy click!');
+        console.log(`${this.product?._id} from CardComponent`);
+        this.buyProduck.emit(this.product?._id);
     }
 
     isStarActive(starIndex: number): boolean {
-        return this.products.rating >= starIndex;
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return this.product!.rating >= starIndex;
     }
 }
