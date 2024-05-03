@@ -1,0 +1,10 @@
+.wrapper {
+    padding: 20px 40px;
+    border-radius: 8px;
+}
+.first {
+    background-color: #c2e8d5;
+}
+.second {
+    background-color: #d2d0ed;
+}

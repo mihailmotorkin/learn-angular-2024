@@ -9,6 +9,19 @@ import {applicationConfigMock} from './shared/application-config/application-con
 })
 export class AppComponent {
     readonly applicationConfig = applicationConfigMock;
+    switchTemplate: boolean | null = true;
+
+    constructor() {
+        setTimeout(() => {
+            this.switchTemplate = !this.switchTemplate;
+        }, 3000);
+        setTimeout(() => {
+            this.switchTemplate = !this.switchTemplate;
+        }, 6000);
+        setTimeout(() => {
+            this.switchTemplate = !this.switchTemplate;
+        }, 9000);
+    }
 
     // isSidenavOpenedFromApp = false;
 
