@@ -1,5 +1,15 @@
-<app-card class="card" (buyProduck)="onBuyProduct($event)" [product]="products[0]"></app-card>
-<app-card class="card" (buyProduck)="onBuyProduct($event)" [product]="products[1]"></app-card>
-<app-card class="card" (buyProduck)="onBuyProduct($event)" [product]="products[2]"></app-card>
-<app-card class="card" (buyProduck)="onBuyProduct($event)" [product]="products[3]"></app-card>
-<app-card class="card" (buyProduck)="onBuyProduct($event)" [product]="products[4]"></app-card>
+<!-- <ng-template #template [appDumpNgIf]="products" let-default="$implicit" let-surName="dumpNgIf">
+  {{ default }}
+  <h3>{{ surName }}</h3>
+</ng-template> -->
+<ng-template [ngIf]="products" [ngIfElse]="loaderTemplate" let-productsFromNgIf="ngIf">
+  <app-card class="card" [product]="productsFromNgIf[0]" (buyProduck)="onBuyProduct($event)"></app-card>
+  <app-card class="card" [product]="productsFromNgIf[1]" (buyProduck)="onBuyProduct($event)"></app-card>
+  <app-card class="card" [product]="productsFromNgIf[2]" (buyProduck)="onBuyProduct($event)"></app-card>
+  <app-card class="card" [product]="productsFromNgIf[3]" (buyProduck)="onBuyProduct($event)"></app-card>
+  <app-card class="card" [product]="productsFromNgIf[4]" (buyProduck)="onBuyProduct($event)"></app-card>
+</ng-template>
+
+<ng-template #loaderTemplate>
+  <mat-spinner></mat-spinner>
+</ng-template>

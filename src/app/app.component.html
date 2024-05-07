@@ -1,19 +1,21 @@
 <app-header [applicationConfig]="applicationConfig" (menuClick)="sidenav.toggleSidenavOpened()"></app-header>
-<!-- <app-sidenav #sidenav [isSidenavOpened]="true"></app-sidenav> -->
-<!-- <app-sidenav #sidenav [navigationTemplate]="navigationTemplate"> -->
+
 <app-sidenav #sidenav>
-  <ng-template #navigationTemplate>
-    {{applicationConfig.title}}
+  <!-- <ng-template #navigationTemplate> -->
+  <ng-container ngProjectAs="drawer-content">
+    <h2>{{ applicationConfig.title }}</h2>
     <mat-list role="list">
-      <mat-list-item role="listitem">Item 1</mat-list-item>
-      <mat-list-item role="listitem">Item 2</mat-list-item>
-      <mat-list-item role="listitem">Item 3</mat-list-item>
+      <mat-list-item appInsertShadow role="listitem">Item 1</mat-list-item>
+      <mat-list-item appInsertShadow role="listitem">Item 2</mat-list-item>
+      <mat-list-item appInsertShadow role="listitem">Item 3</mat-list-item>
     </mat-list>
-  </ng-template>
+  </ng-container>
+  <!-- </ng-template> -->
+  <app-products-list></app-products-list>
 </app-sidenav>
 
 <!-- Вариант подходит и для решения от лектора и через методы Material -->
-<app-popup-host [template]="switchTemplate ? first : second"></app-popup-host>
+<!-- <app-popup-host [template]="switchTemplate ? first : second"></app-popup-host> -->
 
 
 <!--  Вариант решения через "ngTemplateOutlet"  -->
@@ -22,18 +24,17 @@
 </app-popup-host> -->
 
 <ng-template #first>
-  <div class="wrapper first">
+  <div class="first">
     <h2>First</h2>
     <p>Is first template</p>
   </div>
 </ng-template>
 <ng-template #second>
-  <div class="wrapper second">
+  <div class="second">
     <h2>Second</h2>
     <p>Is second template</p>
   </div>
 </ng-template>
-<!-- <app-products-list></app-products-list> -->
 <!-- <ng-template #navigationTemplate>
   {{applicationConfig.title}}
   <mat-list role="list">

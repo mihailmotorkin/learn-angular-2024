@@ -11,23 +11,23 @@ export class AppComponent {
     readonly applicationConfig = applicationConfigMock;
     switchTemplate: boolean | null = true;
 
-    constructor() {
-        setTimeout(() => {
-            this.switchTemplate = !this.switchTemplate;
-        }, 3000);
-        setTimeout(() => {
-            this.switchTemplate = !this.switchTemplate;
-        }, 6000);
-        setTimeout(() => {
-            this.switchTemplate = !this.switchTemplate;
-        }, 9000);
-    }
-
-    // isSidenavOpenedFromApp = false;
-
-    // onMenuClick(event: Event) {
-    //     console.log('click from AppComponent', event);
-
-    //     this.isSidenavOpenedFromApp = !this.isSidenavOpenedFromApp;
+    // constructor() {
+    //     setTimeout(() => {
+    //         this.switchTemplate = !this.switchTemplate;
+    //     }, 3000);
+    //     setTimeout(() => {
+    //         this.switchTemplate = !this.switchTemplate;
+    //     }, 6000);
+    //     setTimeout(() => {
+    //         this.switchTemplate = !this.switchTemplate;
+    //     }, 9000);
     // }
+
+    isSidenavOpenedFromApp = false;
+
+    onMenuClick(event: Event) {
+        console.log('click from AppComponent', event);
+
+        this.isSidenavOpenedFromApp = !this.isSidenavOpenedFromApp;
+    }
 }
