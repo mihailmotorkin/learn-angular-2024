@@ -9,12 +9,12 @@ import {IProduct} from 'src/app/shared/products/product.interface';
 })
 export class CardComponent {
     @Input() product: IProduct | undefined;
-    @Output() readonly buyProduck = new EventEmitter<IProduct['_id']>();
+    @Output() readonly buyProduct = new EventEmitter<IProduct['_id']>();
 
     onBuyProduct(event: Event) {
         event.stopPropagation();
         console.log(`${this.product?._id} from CardComponent`);
-        this.buyProduck.emit(this.product?._id);
+        this.buyProduct.emit(this.product?._id);
     }
 
     isStarActive(starIndex: number): boolean {

@@ -2,7 +2,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IProduct} from 'src/app/shared/products/product.interface';
 import {productsMock} from 'src/app/shared/products/product.mock';
-import {LoadDirection} from 'src/app/shared/scroll-with-loading/scroll-with-loading.directive';
+// import {LoadDirection} from 'src/app/shared/scroll-with-loading/scroll-with-loading.directive';
+import {LoadDirection} from 'src/app/shared/test-from-event/test-from-event.directive';
 
 @Component({
     selector: 'app-products-list',
