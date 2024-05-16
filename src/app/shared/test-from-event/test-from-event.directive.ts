@@ -53,7 +53,14 @@ export class TestFromEventDirective implements OnDestroy {
         );
     }
 
+    // ngOnDestroy() {
+    //     this.subscription?.unsubscribe();
+    // }
     ngOnDestroy() {
-        this.subscription?.unsubscribe();
+        if (this.subscription && !this.subscription.closed) {
+            this.subscription.unsubscribe();
+            console.log('Unsubscribed from scroll$');
+            console.log(this.subscription.closed);
+        }
     }
 }

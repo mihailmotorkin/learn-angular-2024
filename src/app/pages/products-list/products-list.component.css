@@ -19,6 +19,19 @@
     height: 100%;
     overflow: auto;
 }
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
 .card {
     margin: 10px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }

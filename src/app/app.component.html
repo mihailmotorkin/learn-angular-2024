@@ -16,6 +16,7 @@
 
 <!-- Вариант подходит и для решения от лектора и через методы Material -->
 <!-- <app-popup-host [template]="switchTemplate ? first : second"></app-popup-host> -->
+<app-popup-host></app-popup-host>
 
 
 <!--  Вариант решения через "ngTemplateOutlet"  -->
@@ -23,7 +24,7 @@
   <ng-container [ngTemplateOutlet]="switchTemplate ? first : second"></ng-container>
 </app-popup-host> -->
 
-<ng-template #first>
+<!-- <ng-template #first>
   <div class="first">
     <h2>First</h2>
     <p>Is first template</p>
@@ -34,7 +35,9 @@
     <h2>Second</h2>
     <p>Is second template</p>
   </div>
-</ng-template>
+</ng-template> -->
+
+
 <!-- <ng-template #navigationTemplate>
   {{applicationConfig.title}}
   <mat-list role="list">
