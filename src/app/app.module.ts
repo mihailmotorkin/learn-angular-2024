@@ -10,10 +10,35 @@ import {ProductsListModule} from './pages/products-list/products-list.module';
 import {SidenavModule} from './components/sidenav/sidenav.module';
 import {PopupHostModule} from './components/popup-host/popup-host.module';
 import {InsertShadowModule} from './shared/insert-shadow/insert-shadow.module';
+import {ProductsStoreService} from './shared/products/products-store.service';
 
 @NgModule({
     declarations: [AppComponent],
-    providers: [],
+    providers: [
+        ProductsStoreService,
+        // {
+        //     provide: 'ProductsStoreService',
+        //     useExisting: ProductsStoreService,
+        // },
+        // {
+        //     provide: 'userName',
+        //     useValue: 'Egor',
+        // },
+        {
+            provide: 'userAge',
+            useValue: 0,
+        },
+        {
+            provide: 'userName',
+            useFactory: () => 'Egor',
+        },
+        {
+            provide: 'products',
+            useFactory: (productsStoreService: ProductsStoreService) =>
+                productsStoreService.products$,
+            deps: [ProductsStoreService],
+        },
+    ],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,

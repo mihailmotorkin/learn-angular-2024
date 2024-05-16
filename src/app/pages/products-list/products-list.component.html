@@ -10,7 +10,7 @@
   <!-- <div *appDumpNgIf="products as productsFromNgIf;" class="scroll__wrapper"> -->
   <!-- <div class="scroll__wrapper" appTestFromEvent (loadData)="onLoad($event)"> -->
   <ng-container *appPagination="
-                let productsGroup of products;
+                let productsGroup of (products | filterByProperty : name);
                 chankSize: 3;
                 let pageIndexes = pageIndexes;
                 let activeIndex = index;
