@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
+import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderModule} from './components/header/header.module';
@@ -10,12 +11,17 @@ import {ProductsListModule} from './pages/products-list/products-list.module';
 import {SidenavModule} from './components/sidenav/sidenav.module';
 import {PopupHostModule} from './components/popup-host/popup-host.module';
 import {InsertShadowModule} from './shared/insert-shadow/insert-shadow.module';
-import {ProductsStoreService} from './shared/products/products-store.service';
+// import {ProductsStoreService} from './shared/products/products-store.service';
+// import {ProductsApiService} from './shared/products/products-api.service';
 
 @NgModule({
     declarations: [AppComponent],
     providers: [
-        ProductsStoreService,
+        // ProductsStoreService,
+        // {
+        //     provide: ProductsStoreService, // token
+        //     useClass: ProductsStoreService, // class
+        // },
         // {
         //     provide: 'ProductsStoreService',
         //     useExisting: ProductsStoreService,
@@ -24,20 +30,32 @@ import {ProductsStoreService} from './shared/products/products-store.service';
         //     provide: 'userName',
         //     useValue: 'Egor',
         // },
-        {
-            provide: 'userAge',
-            useValue: 0,
-        },
-        {
-            provide: 'userName',
-            useFactory: () => 'Egor',
-        },
-        {
-            provide: 'products',
-            useFactory: (productsStoreService: ProductsStoreService) =>
-                productsStoreService.products$,
-            deps: [ProductsStoreService],
-        },
+        // {
+        //     provide: 'userAge',
+        //     useValue: 0,
+        // },
+        // {
+        //     provide: 'userName',
+        //     useFactory: () => 'Egor',
+        // },
+        // {
+        //     provide: 'products',
+        //     useFactory: (productsStoreService: ProductsStoreService) =>
+        //         productsStoreService.products$,
+        //     deps: [ProductsStoreService],
+        // },
+        // {
+        //     provide: ProductsStoreService,
+        //     useFactory: (productsApiService: ProductsApiService) =>
+        //         new ProductsStoreService(productsApiService),
+        //     deps: [ProductsApiService],
+        // },
+        // ProductsStoreService,
+        // ProductsApiService,
+        // {
+        //     provide: ProductsApiService,
+        //     useClass: ProductsApiService,
+        // },
     ],
     bootstrap: [AppComponent],
     imports: [
@@ -50,6 +68,7 @@ import {ProductsStoreService} from './shared/products/products-store.service';
         PopupHostModule,
         MatListModule,
         InsertShadowModule,
+        HttpClientModule,
     ],
 })
 export class AppModule {}

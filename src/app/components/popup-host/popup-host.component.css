@@ -18,3 +18,8 @@
     border-radius: 8px;
     background-color: #fff;
 }
+.close-button {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+}

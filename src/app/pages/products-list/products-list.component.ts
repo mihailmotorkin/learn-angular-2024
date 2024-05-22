@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {IProduct} from 'src/app/shared/products/product.interface';
 import {ProductsStoreService} from 'src/app/shared/products/products-store.service';
 import {LoadDirection} from 'src/app/shared/scroll-with-loading/scroll-with-loading.directive';
@@ -13,19 +12,11 @@ import {LoadDirection} from 'src/app/shared/scroll-with-loading/scroll-with-load
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent implements OnInit {
-    constructor(
-        private readonly productsStoreService: ProductsStoreService,
-        @Inject('userName') private readonly userName: string,
-        @Inject('userAge') private readonly userAge: string,
-        @Inject('products') readonly products$: Observable<IProduct[] | null>,
-    ) {
-        console.log(this.userName);
-        console.log(this.userAge);
-    }
+    constructor(private readonly productsStoreService: ProductsStoreService) {}
 
-    // readonly products$ = this.productsStoreService.products$;
+    readonly products$ = this.productsStoreService.products$;
 
-    name = 'Планшет';
+    name = '';
 
     ngOnInit() {
         this.productsStoreService.loadProducts();

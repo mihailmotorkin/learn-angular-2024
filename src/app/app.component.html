@@ -1,7 +1,6 @@
 <app-header [applicationConfig]="applicationConfig" (menuClick)="sidenav.toggleSidenavOpened()"></app-header>
 
 <app-sidenav #sidenav>
-  <!-- <ng-template #navigationTemplate> -->
   <ng-container ngProjectAs="drawer-content">
     <h2>{{ applicationConfig.title }}</h2>
     <mat-list role="list">
@@ -10,11 +9,11 @@
       <mat-list-item appInsertShadow role="listitem">Item 3</mat-list-item>
     </mat-list>
   </ng-container>
-  <!-- </ng-template> -->
   <app-products-list></app-products-list>
 </app-sidenav>
 
 <!-- Вариант подходит и для решения от лектора и через методы Material -->
+<!-- <app-popup-host [template]="switchTemplate ? first : second"></app-popup-host> -->
 <!-- <app-popup-host [template]="switchTemplate ? first : second"></app-popup-host> -->
 <app-popup-host></app-popup-host>
 
@@ -35,14 +34,4 @@
     <h2>Second</h2>
     <p>Is second template</p>
   </div>
-</ng-template> -->
-
-
-<!-- <ng-template #navigationTemplate>
-  {{applicationConfig.title}}
-  <mat-list role="list">
-    <mat-list-item role="listitem">Item 1</mat-list-item>
-    <mat-list-item role="listitem">Item 2</mat-list-item>
-    <mat-list-item role="listitem">Item 3</mat-list-item>
-  </mat-list>
 </ng-template> -->
