@@ -1,60 +1,41 @@
+/* eslint-disable import/named */
+/* eslint-disable import/no-deprecated */
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatListModule} from '@angular/material/list';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderModule} from './components/header/header.module';
-import {ProductsListModule} from './pages/products-list/products-list.module';
 import {SidenavModule} from './components/sidenav/sidenav.module';
 import {PopupHostModule} from './components/popup-host/popup-host.module';
 import {InsertShadowModule} from './shared/insert-shadow/insert-shadow.module';
-// import {ProductsStoreService} from './shared/products/products-store.service';
-// import {ProductsApiService} from './shared/products/products-api.service';
+import {NotFoundModule} from './pages/not-found/not-found.module';
+import {BaseUrlInterceptor} from './shared/base-url/base-url.interceptor';
 
 @NgModule({
     declarations: [AppComponent],
     providers: [
-        // ProductsStoreService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: BaseUrlInterceptor,
+            multi: true,
+        },
         // {
-        //     provide: ProductsStoreService, // token
-        //     useClass: ProductsStoreService, // class
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: ErrorInterceptor,
+        //     multi: true,
         // },
         // {
-        //     provide: 'ProductsStoreService',
-        //     useExisting: ProductsStoreService,
+        //     provide: HTTP_INTERCEPTORS,
+        //     useClass: MapInterceptor,
+        //     multi: true,
         // },
         // {
-        //     provide: 'userName',
-        //     useValue: 'Egor',
-        // },
-        // {
-        //     provide: 'userAge',
-        //     useValue: 0,
-        // },
-        // {
-        //     provide: 'userName',
-        //     useFactory: () => 'Egor',
-        // },
-        // {
-        //     provide: 'products',
-        //     useFactory: (productsStoreService: ProductsStoreService) =>
-        //         productsStoreService.products$,
-        //     deps: [ProductsStoreService],
-        // },
-        // {
-        //     provide: ProductsStoreService,
-        //     useFactory: (productsApiService: ProductsApiService) =>
-        //         new ProductsStoreService(productsApiService),
-        //     deps: [ProductsApiService],
-        // },
-        // ProductsStoreService,
-        // ProductsApiService,
-        // {
-        //     provide: ProductsApiService,
-        //     useClass: ProductsApiService,
+        //     provide: NAME_TOKEN,
+        //     useValue: 'AppModule',
         // },
     ],
     bootstrap: [AppComponent],
@@ -63,12 +44,12 @@ import {InsertShadowModule} from './shared/insert-shadow/insert-shadow.module';
         AppRoutingModule,
         BrowserAnimationsModule,
         HeaderModule,
-        ProductsListModule,
         SidenavModule,
         PopupHostModule,
         MatListModule,
         InsertShadowModule,
         HttpClientModule,
+        NotFoundModule,
     ],
 })
 export class AppModule {}

@@ -1,24 +1,16 @@
-<!-- <ng-template #template [appDumpNgIf]="products" let-default="$implicit" let-surName="dumpNgIf">
-  {{ default }}
-  <h3>{{ surName }}</h3>
-</ng-template> -->
-
-<!-- <ng-template [ngIf]="products" [ngIfElse]="loaderTemplate" let-productsFromNgIf="ngIf"> -->
-
-<div *ngIf="(products$ | async) as products; else: loaderTemplate;" class="scroll__wrapper" appScrollWithLoading
-  (loadData)="onLoad($event)">
-  <!-- <div *appDumpNgIf="products as productsFromNgIf;" class="scroll__wrapper"> -->
-  <!-- <div class="scroll__wrapper" appTestFromEvent (loadData)="onLoad($event)"> -->
+<div *ngIf="(products$ | async) as products; else: loaderTemplate;" class="scroll__wrapper">
   <ng-container *appPagination="
                 let productsGroup of (products | filterByProperty : name);
-                chankSize: 3;
+                chankSize: 4;
                 let pageIndexes = pageIndexes;
                 let activeIndex = index;
                 let next = next;
                 let back = back;
                 let selectIndex = selectIndex">
     <div class="cards">
-      <app-card *ngFor="let product of productsGroup trackBy: trackById" class="card" [product]="product"
+      <app-card *ngFor="
+        let product of productsGroup 
+        trackBy: trackById" class="card" [routerLink]="['/', 'product', product._id]" [product]="product"
         (buyProduct)="onBuyProduct($event)">
       </app-card>
     </div>
@@ -27,7 +19,8 @@
         <mat-icon>chevron_left</mat-icon>
       </button>
       <div class="pagination__page-number-container">
-        <button *ngFor="let index of pageIndexes" mat-icon-button class="pagination__page-number"
+        <button *ngFor="
+          let index of pageIndexes" mat-icon-button class="pagination__page-number"
           [class.pagination__page-number_active]="activeIndex === index" (click)="selectIndex(index)">
           {{ index + 1 }}
         </button>
@@ -38,7 +31,6 @@
     </div>
   </ng-container>
 </div>
-<!-- </ng-template> -->
 
 <ng-template #loaderTemplate>
   <mat-spinner></mat-spinner>

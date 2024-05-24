@@ -1,20 +1,27 @@
 /* eslint-disable prettier/prettier */
-import {Observable, map} from 'rxjs';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {map, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {IProduct} from './product.interface';
-import {baseUrl} from '../base-url/base-url.const';
+import {IProductsDto} from './products.dto';
+import {IProductDto} from './product.dto';
+import {getParamsFromObject} from '../params/get-params-from-object';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class ProductsApiService {
     constructor(private readonly httpClient: HttpClient) {}
 
-    getProducts$(): Observable<IProduct[]> {
-        // return of({data: {items: productsMock}}).pipe(map(({data}) => data.items));
+    getProducts$(subCategoryId?: string | null): Observable<IProduct[]> {
         return this.httpClient
-        .get<{data: {items: IProduct[]}}>(`${baseUrl}/products/suggestion`)
-        .pipe(map(({data}) => data.items));
+            .get<IProductsDto>(`/products`, {
+                params: getParamsFromObject({subCat: subCategoryId}),
+            })
+            .pipe(map(({data}) => data.items));
+    }
+
+    getProduct$(id: string): Observable<IProduct | undefined> {
+        return this.httpClient
+            .get<IProductDto>(`/products/${id}`)
+            .pipe(map(({data}) => data));
     }
 }

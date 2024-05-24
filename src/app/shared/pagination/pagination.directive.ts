@@ -17,7 +17,7 @@ import {IPaginationContext} from './pagination-context.interface';
 })
 export class PaginationDirective<T> implements OnChanges, OnInit, OnDestroy {
     @Input() appPaginationOf: T[] | undefined | null;
-    @Input() appPaginationChankSize = 3;
+    @Input() appPaginationChankSize = 4;
 
     private groupedItems: T[][] = [];
 

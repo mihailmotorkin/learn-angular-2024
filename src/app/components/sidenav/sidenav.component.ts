@@ -1,6 +1,13 @@
 /* eslint-disable no-console */
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    ViewChild,
+} from '@angular/core';
 import {MatDrawer} from '@angular/material/sidenav';
+import {CategoriesStoreService} from 'src/app/shared/categories/categories-store.service';
 
 @Component({
     selector: 'app-sidenav',
@@ -8,13 +15,22 @@ import {MatDrawer} from '@angular/material/sidenav';
     styleUrls: ['./sidenav.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidenavComponent {
-    @ViewChild(MatDrawer, {static: true}) private readonly drawerCommponent?: MatDrawer;
+export class SidenavComponent implements OnInit {
+    readonly categories$ = this.categoriesStoreService.categories$;
 
-    constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
+    @ViewChild(MatDrawer, {static: true}) private readonly drawerCommponent!: MatDrawer;
+
+    constructor(
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        private readonly categoriesStoreService: CategoriesStoreService,
+    ) {}
+
+    ngOnInit() {
+        this.categoriesStoreService.loadCategories();
+    }
 
     toggleSidenavOpened() {
-        this.drawerCommponent?.toggle();
+        this.drawerCommponent.toggle();
         this.changeDetectorRef.markForCheck();
     }
 }

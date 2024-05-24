@@ -10,8 +10,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MyAsyncModule} from 'src/app/shared/my-async/my-async.module';
 import {FilterByPropertyModule} from 'src/app/shared/filter-by-property/filter-by-property.module';
+import {RouterModule} from '@angular/router';
 import {ProductsListComponent} from './products-list.component';
 import {CardModule} from './card/card/card.module';
+import {ProductsListRoutingModule} from './products-list-routing.module';
 
 @NgModule({
     declarations: [ProductsListComponent],
@@ -27,7 +29,10 @@ import {CardModule} from './card/card/card.module';
         MatIconModule,
         MyAsyncModule,
         FilterByPropertyModule,
+        RouterModule,
+        ProductsListRoutingModule,
     ],
+    providers: [],
     exports: [ProductsListComponent],
 })
 export class ProductsListModule {}

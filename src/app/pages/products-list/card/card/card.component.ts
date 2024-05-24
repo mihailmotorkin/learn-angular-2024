@@ -5,7 +5,6 @@ import {
     Component,
     EventEmitter,
     Input,
-    OnInit,
     Output,
 } from '@angular/core';
 import {getCurrency} from 'src/app/shared/currency/currency';
@@ -17,7 +16,7 @@ import {IProduct} from 'src/app/shared/products/product.interface';
     styleUrls: ['./card.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
     @Input() product: IProduct | undefined;
     @Output() readonly buyProduct = new EventEmitter<IProduct['_id']>();
 
@@ -27,10 +26,6 @@ export class CardComponent implements OnInit {
         setInterval(() => {
             this.changeDetectorRef.detectChanges();
         }, 1000);
-    }
-
-    ngOnInit() {
-        console.log('CardComponent Created');
     }
 
     onBuyProduct(event: Event) {

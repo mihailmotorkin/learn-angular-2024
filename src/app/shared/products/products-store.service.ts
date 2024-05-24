@@ -1,24 +1,40 @@
 /* eslint-disable prettier/prettier */
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, filter} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {IProduct} from './product.interface';
 import {ProductsApiService} from './products-api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class ProductsStoreService {
     private readonly productsStore$ = new BehaviorSubject<IProduct[] | null>(null);
-
-    constructor(private readonly productsApiService: ProductsApiService) {}
+    private readonly currentProductStore$ = new BehaviorSubject<IProduct | null>(null);
 
     get products$(): Observable<IProduct[] | null> {
         return this.productsStore$.asObservable();
     }
 
-    loadProducts() {
-        this.productsApiService.getProducts$().subscribe(value => {
-            this.productsStore$.next(value);
+    get currentProduct$(): Observable<IProduct | null> {
+        return this.currentProductStore$.asObservable();
+    }
+
+    constructor(private readonly productsApiService: ProductsApiService) {}
+
+    loadProducts(subcategoryId?: string | null) {
+        this.productsApiService.getProducts$(subcategoryId).subscribe(products => {
+            this.productsStore$.next(products);
         });
+    }
+
+    loadProduct(productId: string) {
+        const productPreview = this.productsStore$.value?.find(({_id}) => _id === productId);
+
+        this.currentProductStore$.next(productPreview || null);
+
+        this.productsApiService
+            .getProduct$(productId)
+            .pipe(filter(Boolean))
+            .subscribe(product => {
+                this.currentProductStore$.next(product);
+            });
     }
 }
