@@ -1,6 +1,14 @@
 /* eslint-disable no-console */
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    TemplateRef,
+} from '@angular/core';
 import {IApplicationConfig} from 'src/app/shared/application-config/application-config.interface';
+import {PopupService} from 'src/app/shared/popup/popup.service';
 
 @Component({
     selector: 'app-header',
@@ -10,15 +18,18 @@ import {IApplicationConfig} from 'src/app/shared/application-config/application-
 })
 export class HeaderComponent {
     @Input() applicationConfig: IApplicationConfig | null = null;
-    @Output() readonly menuClick = new EventEmitter<Event>();
+    @Output() readonly menuClick = new EventEmitter<void>();
 
-    onMenuClick(event: Event) {
-        console.log('Menu click!');
-        this.menuClick.emit(event);
+    constructor(private readonly popupService: PopupService) {}
+
+    openPopup(template: TemplateRef<{$implicit: string}>) {
+        this.popupService.openPopup({
+            template,
+            context: {$implicit: this.applicationConfig?.title},
+        });
     }
 
-    onShareClick(event: Event) {
-        event.stopPropagation();
-        console.log('Share click!');
+    closePopup() {
+        this.popupService.closePopup();
     }
 }

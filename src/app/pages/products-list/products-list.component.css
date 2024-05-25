@@ -7,7 +7,7 @@
     min-height: 0;
     padding: 10px;
     box-sizing: border-box;
-    overflow: auto;
+    /* overflow: auto; */
 }
 .scroll__wrapper {
     display: flex;
@@ -34,5 +34,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    overflow-x: scroll;
+}
+
+.loader {
+    margin: auto;
 }

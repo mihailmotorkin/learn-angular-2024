@@ -1,13 +1,5 @@
 /* eslint-disable no-console */
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-} from '@angular/core';
-import {getCurrency} from 'src/app/shared/currency/currency';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {IProduct} from 'src/app/shared/products/product.interface';
 
 @Component({
@@ -20,17 +12,8 @@ export class CardComponent {
     @Input() product: IProduct | undefined;
     @Output() readonly buyProduct = new EventEmitter<IProduct['_id']>();
 
-    readonly getCurrency = getCurrency;
-
-    constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
-        setInterval(() => {
-            this.changeDetectorRef.detectChanges();
-        }, 1000);
-    }
-
     onBuyProduct(event: Event) {
         event.stopPropagation();
-        console.log(`${this.product?._id} from CardComponent`);
         this.buyProduct.emit(this.product?._id);
     }
 

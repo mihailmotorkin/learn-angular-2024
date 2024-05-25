@@ -11,6 +11,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MyAsyncModule} from 'src/app/shared/my-async/my-async.module';
 import {FilterByPropertyModule} from 'src/app/shared/filter-by-property/filter-by-property.module';
 import {RouterModule} from '@angular/router';
+import {CounterInputModule} from 'src/app/shared/counter-input/counter-input.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {IsStringValidatorModule} from 'src/app/shared/test-validators/directives/is-string-validator/is-string-validator.module';
+import {IsStringAsyncValidatorModule} from 'src/app/shared/test-validators/directives/is-string-async-validator/is-string-async-validator.module';
 import {ProductsListComponent} from './products-list.component';
 import {CardModule} from './card/card/card.module';
 import {ProductsListRoutingModule} from './products-list-routing.module';
@@ -31,6 +36,12 @@ import {ProductsListRoutingModule} from './products-list-routing.module';
         FilterByPropertyModule,
         RouterModule,
         ProductsListRoutingModule,
+        CounterInputModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatInputModule,
+        IsStringValidatorModule,
+        IsStringAsyncValidatorModule,
     ],
     providers: [],
     exports: [ProductsListComponent],

@@ -1,12 +1,57 @@
-<div *ngIf="(products$ | async) as products; else: loaderTemplate;" class="scroll__wrapper">
+<!-- <app-counter-input [formControl]="counterForm"></app-counter-input> -->
+<!-- {{counterForm.value}}
+{{counterFormValue$ | async}} -->
+
+<!-- {{counterForm.valid}}
+{{counterForm.touched}}
+{{counterForm.dirty}} -->
+
+<!-- <app-counter-input [ngModel]="counter" (ngModelChange)="counter = $event"></app-counter-input> -->
+<!-- <app-counter-input #ngModel="ngModel" [(ngModel)]="counter"></app-counter-input> -->
+
+<!-- {{counter}}
+{{ngModel.dirty}}
+{{ngModel.valid}}
+{{ngModel.touched}}
+{{ngModel.value}} -->
+
+<!-- <mat-form-field appearance="fill" class="search-input">
+  <mat-label>Search</mat-label>
+  <input matInput [formControl]="searchForm">
+</mat-form-field> -->
+
+<!-- {{searchForm.valid}} -->
+<!-- {{searchForm.errors | json}} -->
+<!-- {{searchFormErrors$ | async | json}} -->
+
+<mat-form-field appearance="fill" class="search-input">
+  <mat-label>Search</mat-label>
+  <input matInput #ngModel="ngModel" appIsStringAsyncValidator required minlength="3" [(ngModel)]="searchName">
+</mat-form-field>
+
+{{ngModel.valid}}
+{{ngModel.errors | json}}
+
+<!-- <div *ngIf="products$ | async as products; else: loaderTemplate;" class="scroll__wrapper">
   <ng-container *appPagination="
-                let productsGroup of (products | filterByProperty : name);
+                let productsGroup of products | filterByProperty : 'name' : ((searchFormValue$ | async) || '');
+                chankSize: 4;
+                let pageIndexes = pageIndexes;
+                let activeIndex = index;
+                let next = next;
+                let back = back;
+                let selectIndex = selectIndex"> -->
+
+<div *ngIf="products$ | async as products; else: loaderTemplate;" class="scroll__wrapper">
+  <ng-container *appPagination="
+                let productsGroup of products | filterByProperty : 'name' : (searchName);
                 chankSize: 4;
                 let pageIndexes = pageIndexes;
                 let activeIndex = index;
                 let next = next;
                 let back = back;
                 let selectIndex = selectIndex">
+
     <div class="cards">
       <app-card *ngFor="
         let product of productsGroup 
@@ -33,5 +78,5 @@
 </div>
 
 <ng-template #loaderTemplate>
-  <mat-spinner></mat-spinner>
+  <mat-spinner class="loader"></mat-spinner>
 </ng-template>

@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {filter, map, switchMap, tap} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ProductsStoreService} from '../../shared/products/products-store.service';
 
 @Component({
@@ -23,14 +23,6 @@ export class ProductComponent {
 
     constructor(
         private readonly productsStoreService: ProductsStoreService,
-        private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
     ) {}
-
-    onNavigateToTab(tab: 'description' | 'type') {
-        // this.router.navigate([`./${tab}`], {relativeTo: this.activatedRoute});
-        const urlTree = this.router.createUrlTree([`./${tab}`], {relativeTo: this.activatedRoute});
-
-        this.router.navigateByUrl(urlTree);
-    }
 }

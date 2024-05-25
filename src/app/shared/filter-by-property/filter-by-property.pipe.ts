@@ -1,17 +1,28 @@
+/* eslint-disable prettier/prettier */
 import {Pipe, PipeTransform} from '@angular/core';
-import {IProduct} from '../products/product.interface';
+import {isString} from './is-string';
 
 @Pipe({
     name: 'filterByProperty',
 })
-export class FilterByPropertyPipe<T extends IProduct> implements PipeTransform {
-    transform(products: T[] | undefined | null, searchName: string): T[] | undefined | null {
-        if (!products?.length) {
-            return products;
+export class FilterByPropertyPipe implements PipeTransform {
+    transform<T, P extends keyof T>(
+        items: T[] | undefined | null,
+        searchingProperty: P,
+        searchValue: T[P],
+    ): T[] | undefined | null {
+        if (!items?.length) {
+            return items;
         }
 
-        searchName = searchName.toUpperCase();
+        if (isString(searchValue)) {
+            const searchValueUpperCase = searchValue.toUpperCase();
 
-        return products.filter(product => product.name.toUpperCase().includes(searchName));
+            return items.filter(item =>
+                (item[searchingProperty] as string).toUpperCase().includes(searchValueUpperCase),
+            );
+        }
+
+        return items.filter(item => item[searchingProperty] === searchValue);
     }
 }
